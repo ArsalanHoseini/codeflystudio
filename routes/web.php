@@ -2,11 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('site.home');
-    
-});
- Route::get('/client', function () {
+use App\Http\Controllers\SiteController;
+
+Route::get('/', [SiteController::class, 'home'])->name('home');
+Route::get('/services', [SiteController::class, 'services'])->name('services');
+Route::get('/plans', [SiteController::class, 'plans'])->name('plans');
+Route::get('/blog', [SiteController::class, 'blog'])->name('blog');
+Route::get('/blog/{slug}', [SiteController::class, 'blogSingle'])->name('blog.single');
+Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
+Route::post('/contact', [SiteController::class, 'sendMessage'])->name('contact.send');
+
+
+
+
+
+Route::get('/client', function () {
         return view('admin.dashboard');
 }); 
 use App\Http\Controllers\Admin\UserController;
